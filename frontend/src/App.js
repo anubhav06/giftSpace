@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage';
 import Header from './components/Header'
+import SetBudgetPage from './pages/SetBudgetPage';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           <PrivateRoute component={HomePage} path="/" exact/>
           <Route component={LoginPage} path="/login"/>
           <Route component={RegisterPage} path="/register"/>
+          
+          <PrivateRoute component={SetBudgetPage} path="/set-budget"/>
+
         </AuthProvider>
       </Router>
     </div>

@@ -16,6 +16,10 @@ export const AuthProvider = ({children}) => {
     let [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
     let [loading, setLoading] = useState(true)
 
+    
+    let [budget, setBudget] = useState([])
+
+
 
     const history = useHistory()
 
@@ -84,6 +88,32 @@ export const AuthProvider = ({children}) => {
     }
 
         
+    // To set the budget of the logged in user
+    let addBudget = async(e) =>{
+        e.preventDefault()
+        let response = await fetch('http://127.0.0.1:8000/api/set-budget/', {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' + String(authTokens.access)
+            },
+            body:JSON.stringify({'budget':e.target.budget.value})
+        })
+        let data = await response.json()
+        if(response.status === 200){
+            // Store the data in useState
+            setBudget(data)
+            alert(data)
+            history.push('/')
+        }
+        else {
+            alert('ERROR GETTING BUDGET: ', data)
+        }
+        
+    }
+
+
+    
 
 
 
@@ -94,6 +124,9 @@ export const AuthProvider = ({children}) => {
         loginUser:loginUser,
         logoutUser:logoutUser,
         registerUser:registerUser,
+
+        budget:budget,
+        addBudget:addBudget,
     }
     
 

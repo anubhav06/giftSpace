@@ -8,9 +8,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from giftSpace.models import User, Budget, Gift, Person, Tracking
+from giftSpace.models import User, Budget, Gift
 
-from .serializers import BudgetSerializer, GiftSerializer, PersonSerializer, TrackingSerializer
+from .serializers import BudgetSerializer, GiftSerializer
 
 
 
@@ -68,6 +68,57 @@ def getRoutes(request):
     return Response(routes)
 
 
+
+
+# To set the budget of a user
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def setBudget(request):
+    newBudget = float(request.data['budget'])
+    
+    # To update the budget of a user if it already exists
+    try:
+        oldBudget = Budget.objects.get(user=request.user)
+        
+        # If the budget is increased
+        if oldBudget.budget < newBudget:
+            addedAmount = newBudget - float(oldBudget.budget)
+            # Increase the balance aswell
+            oldBudget.balance += addedAmount
+        # If the budget is decreased
+        elif oldBudget.budget > newBudget:
+            decreasedAmount = float(oldBudget.budget) - newBudget
+            # Decrease the balance aswell
+            oldBudget.balance -= decreasedAmount
+
+        # Update the budget
+        oldBudget.budget = newBudget
+        oldBudget.save()
+    # If no budget exists of the requested user, then add it as a new budget
+    except ObjectDoesNotExist:
+        budget = Budget(user=request.user, budget=newBudget, balance=newBudget)
+        budget.save()
+
+    return Response('✅Budget Set')
+
+
+
+# To get the budget of a user
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getBudget(request):
+    try:
+        budget = Budget.objects.get(user=request.user)
+    # If budget is not set, then throw an error
+    except ObjectDoesNotExist:
+        return Response('BudgetDoesNotExist', status=status.HTTP_412_PRECONDITION_FAILED)
+
+    print('Budget: ', budget)
+
+    serializer = BudgetSerializer(budget)
+    return Response(serializer.data)
+
+
 # To get the details of all the gifts added by the user
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -75,4 +126,3 @@ def getGifts(request):
     gifts = Gift.objects.filter(user=request.user)
     serializer = GiftSerializer(gifts, many=True)
     return Response(serializer.data)
-
