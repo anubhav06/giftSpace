@@ -13,13 +13,14 @@ import AddGiftPage from './pages/AddGiftPage';
 import TrackingPage from './pages/TrackingPage';
 import AddTrackingPage from './pages/AddTrackingPage';
 import LandingPage from './pages/LandingPage';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <AuthProvider>
-          <Header/>
+          <Navbar/>
           <Route component={LandingPage} path="/" exact/>
           <PrivateRoute component={HomePage} path="/gifts" exact/>
           <Route component={LoginPage} path="/login"/>
