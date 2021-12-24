@@ -8,9 +8,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from giftSpace.models import User, Budget, Gift
+from giftSpace.models import User, Budget, Gift, Person
 
-from .serializers import BudgetSerializer, GiftSerializer
+from .serializers import BudgetSerializer, GiftSerializer, PersonSerializer
 
 
 
@@ -119,6 +119,33 @@ def getBudget(request):
     return Response(serializer.data)
 
 
+
+
+# To add a person to the user's gift receivers list
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addPerson(request):
+    name = request.data['name']
+
+    data = Person(user=request.user, name=name)
+    data.save()
+
+    return Response('✅Added the person')
+
+
+
+# To get the list of person's added by the user
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getPerson(request):
+
+    person = Person.objects.filter(user=request.user)
+    serilizer = PersonSerializer(person, many=True)
+    return Response(serilizer.data)
+
+
+
+
 # To get the details of all the gifts added by the user
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -126,3 +153,4 @@ def getGifts(request):
     gifts = Gift.objects.filter(user=request.user)
     serializer = GiftSerializer(gifts, many=True)
     return Response(serializer.data)
+

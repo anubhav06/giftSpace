@@ -59,12 +59,36 @@ const HomePage = () => {
             
         }
 
+        // To get the person (list of recipient) added by the user
+        let getPerson = async() =>{
+            let response = await fetch('http://127.0.0.1:8000/api/get-person/', {
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization':'Bearer ' + String(authTokens.access)
+                }
+            })
+            let data = await response.json()
+
+            if(response.status === 200){
+                // Store the data in useState
+                setPerson(data)
+                console.log('PERSON: ', data)
+            }
+            else{
+                alert('ERROR GETTING THE PERSON LIST: ', data)
+            }
+            
+        }
+
        
 
         // Call the function every time the page loads
         getGifts()
         getBudget()
+        getPerson()
     }, [])
+
 
 
 
@@ -73,7 +97,17 @@ const HomePage = () => {
             <p>You are logged to the home page!</p><br/><br/>
 
             <p> BUDGET: {budget.budget} </p>
-        
+            <Link to='/set-budget'> Edit Budget </Link> <br/><br/><br/>
+                
+            <p> PEOPLE: </p>
+            <select name='personList'>
+                {person.length === 0 ? <option key='NoPerson' disabled> No Person Added </option> : null}
+                {person.map(x => (
+                    <option key={x.id}> {x.name} </option>
+                ))}
+            </select> <br/>
+            <Link to='/add-person'> Add People </Link> <br/><br/><br/> <br/><br/>
+
 
             <Link to='/add-gift'> Add Gift </Link> <br/>
             <p> GIFTS OF USER: </p>

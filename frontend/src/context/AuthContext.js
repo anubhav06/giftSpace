@@ -113,7 +113,29 @@ export const AuthProvider = ({children}) => {
     }
 
 
-    
+    // To add a person to the user's recipient's list
+    let addPerson = async(e) =>{
+        e.preventDefault()
+        let response = await fetch('http://127.0.0.1:8000/api/add-person/', {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' + String(authTokens.access)
+            },
+            body:JSON.stringify({'name':e.target.name.value})
+        })
+        let data = await response.json()
+        if(response.status === 200){
+            alert(data)
+            history.push('/')
+        }
+        else {
+            alert('ERROR ADDING PERSON: ', data)
+        }
+        
+    }
+
+   
 
 
 
@@ -127,6 +149,7 @@ export const AuthProvider = ({children}) => {
 
         budget:budget,
         addBudget:addBudget,
+        addPerson:addPerson,
     }
     
 

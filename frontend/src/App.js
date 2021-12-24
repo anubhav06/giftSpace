@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage';
 import Header from './components/Header'
 import SetBudgetPage from './pages/SetBudgetPage';
+import AddPersonPage from './pages/AddPersonPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route component={RegisterPage} path="/register"/>
           
           <PrivateRoute component={SetBudgetPage} path="/set-budget"/>
+          <PrivateRoute component={AddPersonPage} path="/add-person"/>
 
         </AuthProvider>
       </Router>

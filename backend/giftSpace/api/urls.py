@@ -14,8 +14,10 @@ urlpatterns = [
     path('get-budget/', views.getBudget, name='getBudget'),
     path('set-budget/', views.setBudget, name='setBudget'),
 
-    path('gifts/', views.getGifts),
+    path('add-person/', views.addPerson, name='addPerson'),
+    path('get-person/', views.getPerson, name='getPerson'),
 
+    path('gifts/', views.getGifts),
 
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
