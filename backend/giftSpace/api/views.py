@@ -8,9 +8,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from giftSpace.models import User, Budget, Gift, Person
+from giftSpace.models import User, Budget, Gift, Person, Tracking
 
-from .serializers import BudgetSerializer, GiftSerializer, PersonSerializer
+from .serializers import BudgetSerializer, GiftSerializer, PersonSerializer, TrackingSerializer
 
 
 
@@ -195,3 +195,29 @@ def deleteGift(request, id):
     
     return Response('✅Gift deleted')
 
+
+
+# To add a tracking data
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addTrackingData(request):
+
+    company = request.data['company']
+    trackingID = request.data['trackingID']
+    description = request.data['description']
+    recipient = request.data['recipient']
+
+    trackingData = Tracking(user=request.user, company=company, trackingID=trackingID, description=description, recipient=recipient)
+    trackingData.save()
+    
+    return Response('✅Added tracking data')
+
+
+# To get the tracking data
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getTrackingData(request):
+
+    trackingData = Tracking.objects.filter(user=request.user)
+    serializer = TrackingSerializer(trackingData, many=True)
+    return Response(serializer.data)

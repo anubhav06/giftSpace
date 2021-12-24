@@ -32,3 +32,14 @@ class Person(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+
+
+class Tracking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userTracking')
+    company = models.CharField(max_length=16)
+    trackingID = models.CharField(max_length=32)
+    description = models.CharField(max_length=64)
+    recipient = models.CharField(max_length=32)
+    
+    def __str__(self):
+        return f"{self.company} | {self.trackingID} | {self.recipient}"

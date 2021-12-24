@@ -10,6 +10,8 @@ import Header from './components/Header'
 import SetBudgetPage from './pages/SetBudgetPage';
 import AddPersonPage from './pages/AddPersonPage';
 import AddGiftPage from './pages/AddGiftPage';
+import TrackingPage from './pages/TrackingPage';
+import AddTrackingPage from './pages/AddTrackingPage';
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
           <PrivateRoute component={SetBudgetPage} path="/set-budget"/>
           <PrivateRoute component={AddPersonPage} path="/add-person"/>
           <PrivateRoute component={AddGiftPage} path='/add-gift'/>
+
+          <PrivateRoute component={TrackingPage} path='/tracking'/>
+          <PrivateRoute component={AddTrackingPage} path='/add-tracking'/>
         </AuthProvider>
       </Router>
     </div>
