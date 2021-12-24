@@ -12,6 +12,7 @@ import AddPersonPage from './pages/AddPersonPage';
 import AddGiftPage from './pages/AddGiftPage';
 import TrackingPage from './pages/TrackingPage';
 import AddTrackingPage from './pages/AddTrackingPage';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
       <Router>
         <AuthProvider>
           <Header/>
-          <PrivateRoute component={HomePage} path="/" exact/>
+          <Route component={LandingPage} path="/" exact/>
+          <PrivateRoute component={HomePage} path="/gifts" exact/>
           <Route component={LoginPage} path="/login"/>
           <Route component={RegisterPage} path="/register"/>
           

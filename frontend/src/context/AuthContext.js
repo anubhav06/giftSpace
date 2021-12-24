@@ -46,7 +46,7 @@ export const AuthProvider = ({children}) => {
             // Set the authTokens in the local storage
             localStorage.setItem('authTokens', JSON.stringify(data))
             // Redirect user to home page
-            history.push('/')
+            history.push('/gifts')
         }else{
             alert('Something went wrong!')
         }
@@ -80,7 +80,7 @@ export const AuthProvider = ({children}) => {
         if(response.status === 200){
             console.log('Registered Successfully')
             alert(data)
-            history.push('/')
+            history.push('/gifts')
         }else{
             console.log(data)
             alert(data)
@@ -104,7 +104,7 @@ export const AuthProvider = ({children}) => {
             // Store the data in useState
             setBudget(data)
             alert(data)
-            history.push('/')
+            history.push('/gifts')
         }
         else {
             alert('ERROR GETTING BUDGET: ', data)
@@ -127,7 +127,7 @@ export const AuthProvider = ({children}) => {
         let data = await response.json()
         if(response.status === 200){
             alert(data)
-            history.push('/')
+            history.push('/gifts')
         }
         else {
             alert('ERROR ADDING PERSON: ', data)
@@ -149,7 +149,7 @@ export const AuthProvider = ({children}) => {
         let data = await response.json()
         if(response.status === 200){
             alert(data)
-            history.push('/')
+            history.push('/gifts')
         }
         else {
             alert('ERROR ADDING GIFT: ', data)

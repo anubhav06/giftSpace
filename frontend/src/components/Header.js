@@ -6,7 +6,7 @@ const Header = () => {
     let {user, logoutUser} = useContext(AuthContext)
     return (
         <div>
-            <Link to="/" >Home</Link>
+            <Link to="/gifts" >Home</Link>
 
             <span> | </span>
             {/* If user is logged in then show logout button else show login button */}

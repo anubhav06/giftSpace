@@ -54,7 +54,7 @@ const AddTrackingPage = () => {
         let data = await response.json()
         if(response.status === 200){
             alert(data)
-            history.push('/')
+            history.push('/gifts')
         }
         else {
             alert('ERROR ADDING GIFT: ', data)
