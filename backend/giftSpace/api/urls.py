@@ -17,6 +17,8 @@ urlpatterns = [
     path('add-person/', views.addPerson, name='addPerson'),
     path('get-person/', views.getPerson, name='getPerson'),
 
+    path('add-gift/', views.addGift, name='addGift'),
+    path('delete-gift/<str:id>/', views.deleteGift, name='deleteGift'),
     path('gifts/', views.getGifts),
 
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),

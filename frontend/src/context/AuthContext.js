@@ -135,7 +135,28 @@ export const AuthProvider = ({children}) => {
         
     }
 
-   
+    // To add a gift
+    let addGift = async(e) =>{
+        e.preventDefault()
+        let response = await fetch('http://127.0.0.1:8000/api/add-gift/', {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer ' + String(authTokens.access)
+            },
+            body:JSON.stringify({'link':e.target.link.value, 'price':e.target.price.value, 'trackingID':e.target.trackingID.value, 'person':e.target.person.value})
+        })
+        let data = await response.json()
+        if(response.status === 200){
+            alert(data)
+            history.push('/')
+        }
+        else {
+            alert('ERROR ADDING GIFT: ', data)
+        }
+        
+    }
+    
 
 
 
@@ -150,6 +171,7 @@ export const AuthProvider = ({children}) => {
         budget:budget,
         addBudget:addBudget,
         addPerson:addPerson,
+        addGift:addGift,
     }
     
 

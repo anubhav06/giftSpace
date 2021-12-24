@@ -90,6 +90,24 @@ const HomePage = () => {
     }, [])
 
 
+    let deleteGift = async (id) => {
+        let response = await fetch(`http://127.0.0.1:8000/api/delete-gift/${id}/`, {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization':'Bearer ' + String(authTokens.access)
+                }
+            })
+            let data = await response.json()
+
+            if(response.status === 200){
+                alert(data)
+            }
+            else{
+                alert('ERROR DELETING GIFT: ', data)
+            }
+    }
+
 
 
     return (
@@ -97,6 +115,7 @@ const HomePage = () => {
             <p>You are logged to the home page!</p><br/><br/>
 
             <p> BUDGET: {budget.budget} </p>
+            <p> BALANCE: {budget.balance} </p>
             <Link to='/set-budget'> Edit Budget </Link> <br/><br/><br/>
                 
             <p> PEOPLE: </p>
