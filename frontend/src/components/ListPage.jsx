@@ -22,7 +22,6 @@ import {
   GiftPrice,
   ForWhom,
   LinkToGift,
-  Edit,
   Delete,
   AddItemButton,
   AddToListButton,
