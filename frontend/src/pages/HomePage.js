@@ -60,7 +60,7 @@ const HomePage = () => {
 
         // To get the gifts of a user from backend and display in frontend
         let getGifts = async() =>{
-            let response = await fetch('http://127.0.0.1:8000/api/gifts/', {
+            let response = await fetch('https://gift-space.herokuapp.com/api/gifts/', {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
@@ -81,7 +81,7 @@ const HomePage = () => {
 
          // To get the budget of a user
         let getBudget = async() =>{
-            let response = await fetch('http://127.0.0.1:8000/api/get-budget/', {
+            let response = await fetch('https://gift-space.herokuapp.com/api/get-budget/', {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
@@ -107,7 +107,7 @@ const HomePage = () => {
 
         // To get the person (list of recipient) added by the user
         let getPerson = async() =>{
-            let response = await fetch('http://127.0.0.1:8000/api/get-person/', {
+            let response = await fetch('https://gift-space.herokuapp.com/api/get-person/', {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
@@ -137,7 +137,7 @@ const HomePage = () => {
 
 
     let deleteGift = async (id) => {
-        let response = await fetch(`http://127.0.0.1:8000/api/delete-gift/${id}/`, {
+        let response = await fetch(`https://gift-space.herokuapp.com/api/delete-gift/${id}/`, {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json',
@@ -178,7 +178,7 @@ const HomePage = () => {
     const handleClick = async (e) => {
 
         e.preventDefault()
-        let response = await fetch('http://127.0.0.1:8000/api/set-budget/', {
+        let response = await fetch('https://gift-space.herokuapp.com/api/set-budget/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
@@ -318,7 +318,7 @@ const HomePage = () => {
                     onClick={async(e) => {
                         // setting the main items useState
                         e.preventDefault()
-                        let response = await fetch('http://127.0.0.1:8000/api/add-gift/', {
+                        let response = await fetch('https://gift-space.herokuapp.com/api/add-gift/', {
                             method:'POST',
                             headers:{
                                 'Content-Type':'application/json',
@@ -390,7 +390,7 @@ const HomePage = () => {
                             <Delete key={id}
                             id={id}
                             onClick={ async() => {
-                                let response = await fetch(`http://127.0.0.1:8000/api/delete-gift/${e.id}/`, {
+                                let response = await fetch(`https://gift-space.herokuapp.com/api/delete-gift/${e.id}/`, {
                                     method:'POST',
                                     headers:{
                                         'Content-Type':'application/json',

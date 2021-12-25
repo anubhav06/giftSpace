@@ -15,7 +15,7 @@ const TrackingPage = () => {
 
         // To get the person (list of recipient) added by the user
         let getPerson = async() =>{
-            let response = await fetch('http://127.0.0.1:8000/api/get-person/', {
+            let response = await fetch('https://gift-space.herokuapp.com/api/get-person/', {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
@@ -38,7 +38,7 @@ const TrackingPage = () => {
 
         // To get the tracking data
         let getTrackingData = async() =>{
-            let response = await fetch('http://127.0.0.1:8000/api/get-tracking/', {
+            let response = await fetch('https://gift-space.herokuapp.com/api/get-tracking/', {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
