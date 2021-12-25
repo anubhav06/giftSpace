@@ -5,6 +5,7 @@ import {
   UserNameWrapper,
   PasswordWrapper,
   InputWrapper,
+  InputWrapperPass,
   UserIcon,
   PassIcon,
   SubmitButton,
@@ -26,7 +27,7 @@ const Login = () => {
         </UserNameWrapper>
         <PasswordWrapper>
           <PassIcon />
-          <InputWrapper
+          <InputWrapperPass
             type="password"
             name="password"
             placeholder="Enter Password"
