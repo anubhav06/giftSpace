@@ -13,7 +13,10 @@ export const NavWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   @media only screen and (max-width: 480px) {
     gap: 20px;
     padding: 1rem;
@@ -59,8 +62,15 @@ export const Button = styled.button`
     width: 100%;
     transition: 0.5s ease-in-out;
   }
+<<<<<<< HEAD
 
   @media only screen and (max-width: 480px) {
     font-size: 15px;
   }
 `;
+=======
+  @media only screen and (max-width: 480px) {
+    font-size: 15px;
+  }
+`;
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc

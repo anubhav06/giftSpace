@@ -58,7 +58,10 @@ export const MainText = styled.h1`
   font-size: 32px;
   font-weight: 400;
   color: ${colors.blackColor};
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   @media only screen and (max-width: 480px) {
     font-size: 21px;
   }
@@ -73,7 +76,10 @@ export const DescText = styled.h2`
   font-weight: 400;
   font-size: 25px;
   margin-block: 2rem;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   @media only screen and (max-width: 480px) {
     font-size: 18px;
     margin-block: 1.5rem;
@@ -100,7 +106,10 @@ export const ListOfFeatures = styled.div`
 export const Feat = styled.p`
   font-size: 19px;
   margin-block: 20px;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   @media only screen and (max-width: 480px) {
     font-size: 16px;
     margin-block: 1.5rem;
@@ -128,4 +137,8 @@ export const LinkRouterButton = styled.button`
     height: 40px;
     width: 170px;
   }
+<<<<<<< HEAD
 `;
+=======
+`;
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc

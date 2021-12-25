@@ -4,13 +4,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.serializers import Serializer
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from giftSpace.models import User, Budget, Gift, Person
+from giftSpace.models import User, Budget, Gift, Person, Tracking
 
-from .serializers import BudgetSerializer, GiftSerializer, PersonSerializer
+from .serializers import BudgetSerializer, GiftSerializer, PersonSerializer, TrackingSerializer
 
 
 
@@ -144,6 +145,29 @@ def getPerson(request):
     return Response(serilizer.data)
 
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addGift(request):
+    link = request.data['link']
+    price = request.data['price']
+    description = request.data['description']
+    person = request.data['person']
+
+    # Get the user's budget and subtract the gift's amount from it
+    oldBudget = Budget.objects.get(user=request.user)
+    newBalance = float(oldBudget.balance) - float(price)
+    # Update the balance amount
+    oldBudget.balance = newBalance
+    oldBudget.save()
+
+    # To add a new gift
+    data = Gift(user=request.user, link=link, price=price, description=description, recipient=person)
+    data.save()
+    
+    print('GIFT ID: ', data.id)
+    serializer = GiftSerializer(data)
+    return Response(serializer.data)
+
 
 
 # To get the details of all the gifts added by the user
@@ -154,3 +178,50 @@ def getGifts(request):
     serializer = GiftSerializer(gifts, many=True)
     return Response(serializer.data)
 
+
+# To delete the requested gift item
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def deleteGift(request, id):
+    
+    print('DELETE ID: ', id)
+    # Find the gift by its ID
+    gift = Gift.objects.get(user=request.user, id=id)
+
+    # Update the user's balance by adding the gift's amount to it
+    price = gift.price
+    budget = Budget.objects.get(user=request.user)
+    budget.balance += price
+    budget.save()
+
+    # Delete the requested gift
+    gift.delete()
+    
+    return Response('✅Gift deleted')
+
+
+
+# To add a tracking data
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def addTrackingData(request):
+
+    company = request.data['company']
+    trackingID = request.data['trackingID']
+    description = request.data['description']
+    recipient = request.data['recipient']
+
+    trackingData = Tracking(user=request.user, company=company, trackingID=trackingID, description=description, recipient=recipient)
+    trackingData.save()
+    
+    return Response('✅Added tracking data')
+
+
+# To get the tracking data
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getTrackingData(request):
+
+    trackingData = Tracking.objects.filter(user=request.user)
+    serializer = TrackingSerializer(trackingData, many=True)
+    return Response(serializer.data)

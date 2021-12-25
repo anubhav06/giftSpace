@@ -29,7 +29,10 @@ export const BudgetArea = styled.div`
   margin-block: 1rem;
   flex-wrap: wrap;
   /* background: blue; */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   @media only screen and (max-width: 480px) {
     width: 100%;
     height: auto;
@@ -42,7 +45,10 @@ export const BudgetLeft = styled.div`
   max-width: 100%;
   height: 100%;
   /* background: purple; */
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   @media only screen and (max-width: 480px) {
     width: 100%;
     text-align: center;
@@ -100,7 +106,10 @@ export const Hr = styled.hr`
   background: #3a506652;
   color: #3a506652;
   border: 1px solid #3a506652;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   @media only screen and (max-width: 480px) {
     width: 80%;
     margin: 2rem auto;
@@ -130,7 +139,10 @@ export const AddItemPopUp = styled.div`
   display: ${({ show }) => (show ? "flex" : "none")};
   flex-direction: column;
   padding: 1rem;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   @media only screen and (max-width: 480px) {
     width: 95%;
     margin: auto;
@@ -207,7 +219,10 @@ export const Cross = styled(FaTimesCircle)`
   right: 0.5rem;
   top: 0.5rem;
   cursor: pointer;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
   font-size: 31px;
 `;
 
@@ -298,4 +313,8 @@ export const ErrorMessage = styled.div`
   color: #f05454;
   font-size: 18px;
   font-weight: bolder;
+<<<<<<< HEAD
 `;
+=======
+`;
+>>>>>>> 583f0f7fcf356dacd61181f46b8bdd844c7779bc
