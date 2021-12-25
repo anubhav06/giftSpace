@@ -28,10 +28,10 @@ const TrackingPage = () => {
 
     const history = useHistory()
 
-    
     const [addItem, setAddItem] = useState(false);
     const [items, setItems] = useState([]);
     const [description, setNameOfGift] = useState("");
+    const [id, setIDofGift] = useState([])
     const [trackingID, setTrackingID] = useState(0);
     const [recipient, setForWhomGift] = useState("");
     const [company, setDeliveryCompany] = useState("");
