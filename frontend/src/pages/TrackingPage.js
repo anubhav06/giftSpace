@@ -44,7 +44,7 @@ const TrackingPage = () => {
 
         // To get the tracking data
         let getTrackingData = async() =>{
-            let response = await fetch('http://127.0.0.1:8000/api/get-tracking/', {
+            let response = await fetch('https://gift-space.herokuapp.com/api/get-tracking/', {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
@@ -107,7 +107,7 @@ const TrackingPage = () => {
                     onClick={async(e) => {
                         // setting the main items useState
                         e.preventDefault()
-                        let response = await fetch('http://127.0.0.1:8000/api/add-tracking/', {
+                        let response = await fetch('https://gift-space.herokuapp.com/api/add-tracking/', {
                             method:'POST',
                             headers:{
                                 'Content-Type':'application/json',
@@ -156,7 +156,7 @@ const TrackingPage = () => {
                     <AddToListButton
                     onClick={async(e) => {
                         e.preventDefault()
-                        let response = await fetch('http://127.0.0.1:8000/api/send-message/', {
+                        let response = await fetch('https://gift-space.herokuapp.com/api/send-message/', {
                             method:'POST',
                             headers:{
                                 'Content-Type':'application/json',
