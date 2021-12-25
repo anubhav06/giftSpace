@@ -2,8 +2,9 @@ import React, {useContext} from 'react'
 import AuthContext from '../context/AuthContext'
 import {
     BudgetLeft,
+    BudgetCenter,
     H2EnterBudget,
-    InputBudget,
+    InputSetBudget,
 } from "../StyledElements/ListPageElements";
 import {
     Form,
@@ -16,16 +17,16 @@ const SetBudgetPage = () => {
 
     return (
         <div>
-            <BudgetLeft>
+            <BudgetCenter>
                 <Form onSubmit={addBudget}>
                     <H2EnterBudget>Enter Budget</H2EnterBudget>
-                    <InputBudget
+                    <InputSetBudget
                     placeholder="Enter your budget here..."
                     type="number" name="budget"
                     />
                     <SubmitButton type="submit" />
                 </Form>
-            </BudgetLeft>
+            </BudgetCenter>
         </div>
     )
 }
