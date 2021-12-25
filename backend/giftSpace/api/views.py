@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.serializers import Serializer
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -149,7 +150,7 @@ def getPerson(request):
 def addGift(request):
     link = request.data['link']
     price = request.data['price']
-    trackingID = request.data['trackingID']
+    description = request.data['description']
     person = request.data['person']
 
     # Get the user's budget and subtract the gift's amount from it
@@ -160,10 +161,12 @@ def addGift(request):
     oldBudget.save()
 
     # To add a new gift
-    data = Gift(user=request.user, link=link, price=price, trackingID=trackingID, recipient=person)
+    data = Gift(user=request.user, link=link, price=price, description=description, recipient=person)
     data.save()
-
-    return Response('✅ Added Gift')
+    
+    print('GIFT ID: ', data.id)
+    serializer = GiftSerializer(data)
+    return Response(serializer.data)
 
 
 
@@ -181,6 +184,7 @@ def getGifts(request):
 @permission_classes([IsAuthenticated])
 def deleteGift(request, id):
     
+    print('DELETE ID: ', id)
     # Find the gift by its ID
     gift = Gift.objects.get(user=request.user, id=id)
 
