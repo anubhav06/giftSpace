@@ -55,7 +55,7 @@ def register(request):
         user.save()
     except IntegrityError:
         return Response("ERROR: Username already taken", status=status.HTTP_406_NOT_ACCEPTABLE)
-    return Response('Registered Successfully from backend')
+    return Response('✅ Registered Successfully')
 
 
 
