@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FaUser, FaStarOfLife } from "react-icons/fa";
+import { FaUser, FaStarOfLife, FaEnvelope } from "react-icons/fa";
 const colors = {
   orangeColor: "#F05454",
   darkBlueColor: "#30475E",
@@ -7,25 +7,31 @@ const colors = {
 };
 
 export const Form = styled.form`
-  height: 70%;
+  height: 80%;
   width: 400px;
-  /* background: blue; */
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 `;
 
-export const LoginWrapper = styled.div`
+export const RegWrapper = styled.div`
   height: 80vh;
   width: 100%;
-  /* background-color: red; */
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 export const UserNameWrapper = styled.div`
+  margin-block-start: 2rem;
+  display: flex;
+  /* background: red; */
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const MailWrapper = styled.div`
   margin-block-start: 2rem;
   display: flex;
   /* background: red; */
@@ -88,8 +94,9 @@ export const SubmitButton = styled.input.attrs({ type: "submit" })`
   width: 100px;
   margin-block: 2rem;
   cursor: pointer;
-<<<<<<< HEAD
 `;
-=======
+
+export const MailIcon = styled(FaEnvelope)`
+  font-size: 19px;
+  color: ${colors.orangeColor};
 `;
->>>>>>> 4e9ca9ea174e66fa2b5f192711d00296cb5c62f0
