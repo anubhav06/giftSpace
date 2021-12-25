@@ -28,7 +28,7 @@ export const Logo = styled.h1`
 `;
 
 export const LoginWrapper = styled.div`
-  max-width: 14rem;
+  max-width: 25rem;
   min-width: 10rem;
   display: flex;
   justify-content: space-between;
@@ -43,7 +43,7 @@ export const Button = styled.button`
   outline: none;
   cursor: pointer;
   position: relative;
-  padding: 0.4rem 0;
+  padding: 0.8rem 1rem;
   &::after {
     content: "";
     position: absolute;

@@ -8,7 +8,9 @@ import {
     HeadingPopUp,
     InputGift,
     InputPrice,
+    InputNumber,
     InputPerson,
+    InputRecipient,
     InputLink,
     ActualList,
     ListObject,
@@ -75,7 +77,6 @@ const TrackingPage = () => {
 
     return (
         <div>
-            <p> ------ TRACKING PAGE!------ ADD BIG HEADING/LOGO HERE ------ </p><br/><br/>
 
 
             <Heading>Add tracking data to your list</Heading>
@@ -141,14 +142,14 @@ const TrackingPage = () => {
                 {/*  POP UP TO SEND MSG */}
                 <AddItemPopUp show={sendMsg}>
                     <Cross onClick={() => setMsg(!sendMsg)} />
-                    <HeadingPopUp> SEND MESSAGE </HeadingPopUp>
+                    <HeadingPopUp> SEND SMS </HeadingPopUp>
                     
-                    <InputPerson
+                    <InputRecipient
                     onChange={(e) => setForWhomGift(e.target.value)}
                     type="text"
                     placeholder="Recipient's Name"
                     />
-                    <InputPrice
+                    <InputNumber
                     onChange={(e) => setMobileNumber(e.target.value)}
                     type="number"
                     placeholder="Enter mobile number (with country code)"
@@ -214,7 +215,7 @@ const TrackingPage = () => {
                                 setForWhomGift(e.recipient)
                             } 
                             }>
-                            Send Message
+                            Send SMS
                             </AddItemButton>
                         </ListObject>
                         </>

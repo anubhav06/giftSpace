@@ -47,6 +47,23 @@ export const BudgetLeft = styled.div`
   }
 `;
 
+export const BudgetCenter = styled.div`
+  min-width: 10%;
+  max-width: 100%;
+  height: 100%;
+  width: 26rem;
+  height: 18rem;
+  padding-top: 5rem;
+  margin-left: 35rem;
+  margin-top: 7rem;
+  background: #E9FEFF;
+  border: 5px solid black;
+  @media only screen and (max-width: 480px) {
+    width: 100%;
+    text-align: center;
+  }
+`;
+
 export const H2EnterBudget = styled.h2`
   color: ${colors.darkBlueColor};
 `;
@@ -69,6 +86,27 @@ export const InputBudget = styled.input.attrs({ type: "number" })`
     text-align: center;
   }
 `;
+
+export const InputSetBudget = styled.input.attrs({ type: "number" })`
+  display: block;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 4px 4px 20px grey;
+  background: transparent;
+  outline: none;
+  margin-block: 2rem;
+  min-width: 35%;
+  width: 12rem;
+  height: 3rem;
+  @media only screen and (max-width: 480px) {
+    display: flex;
+    width: 60%;
+    margin: 2rem auto;
+    text-align: center;
+  }
+`;
+
 export const ConfirmBudgetButton = styled.button`
   background: #2f2e41;
   color: #fff;
@@ -114,6 +152,8 @@ export const Heading = styled.h1`
   text-align: center;
   margin-block-end: 1.2rem;
 `;
+
+
 export const AddItemPopUp = styled.div`
   position: absolute;
   left: 50%;
@@ -160,6 +200,18 @@ export const InputPrice = styled.input.attrs({ type: "number" })`
   margin: 0.2rem auto;
 `;
 
+export const InputNumber = styled.input.attrs({ type: "number" })`
+  width: 60%;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  box-shadow: 2px 4px 6px rgba(117, 117, 117, 0.25);
+  margin: 0.2rem auto;
+  margin-bottom: 2rem;
+`;
+
 export const InputPerson = styled.input`
   width: 50%;
   padding: 0.5rem 1rem;
@@ -169,6 +221,18 @@ export const InputPerson = styled.input`
   font-size: 15px;
   box-shadow: 2px 4px 6px rgba(117, 117, 117, 0.25);
   margin: 0.2rem auto;
+`;
+
+export const InputRecipient = styled.input`
+  width: 60%;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  box-shadow: 2px 4px 6px rgba(117, 117, 117, 0.25);
+  margin: 0.5rem auto;
+  margin-top: 2rem;
 `;
 
 export const InputLink = styled.input`
