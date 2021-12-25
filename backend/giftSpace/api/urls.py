@@ -24,6 +24,8 @@ urlpatterns = [
     path('add-tracking/', views.addTrackingData, name='addTrackingData'),
     path('get-tracking/', views.getTrackingData, name='getTrackingData'),
 
+    path('send-message/', views.sendMessage, name='sendMessage'),
+
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
