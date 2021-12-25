@@ -1,8 +1,14 @@
 import React, {useContext} from 'react'
 import AuthContext from '../context/AuthContext'
-import { Redirect } from 'react-router-dom'
-
-
+import {
+    BudgetLeft,
+    H2EnterBudget,
+    InputBudget,
+} from "../StyledElements/ListPageElements";
+import {
+    Form,
+    SubmitButton,
+} from "../StyledElements/RegElements";
 
 
 const SetBudgetPage = () => {
@@ -10,10 +16,16 @@ const SetBudgetPage = () => {
 
     return (
         <div>
-            <form onSubmit={addBudget}>
-                <input type="number" step="0.01" name="budget" placeholder="Enter Budget" />
-                <input type="submit"/>
-            </form>
+            <BudgetLeft>
+                <Form onSubmit={addBudget}>
+                    <H2EnterBudget>Enter Budget</H2EnterBudget>
+                    <InputBudget
+                    placeholder="Enter your budget here..."
+                    type="number" name="budget"
+                    />
+                    <SubmitButton type="submit" />
+                </Form>
+            </BudgetLeft>
         </div>
     )
 }
