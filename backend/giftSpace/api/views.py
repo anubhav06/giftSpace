@@ -1,6 +1,4 @@
-from django.http import response
 from rest_framework import status
-from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -14,7 +12,9 @@ from giftSpace.models import User, Budget, Gift, Person, Tracking
 
 from .serializers import BudgetSerializer, GiftSerializer, PersonSerializer, TrackingSerializer
 
-
+from twilio.rest import Client
+import os
+from decouple import config
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -227,3 +227,37 @@ def getTrackingData(request):
     trackingData = Tracking.objects.filter(user=request.user)
     serializer = TrackingSerializer(trackingData, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def sendMessage(request):
+
+    company = request.data['company']
+    trackingID = request.data['trackingID']
+    description = request.data['description']
+    recipient = request.data['recipient']
+    mobileNumber = request.data['mobileNumber']
+
+    account_sid = config('TWILIO_ACCOUNT_SID')
+    auth_token = config('TWILIO_AUTH_TOKEN')
+    client = Client(account_sid, auth_token) 
+
+    sendTo = '+' + mobileNumber
+    sendTo = str(sendTo)
+
+    sendBody = '\nHi ' + str(recipient) + '! I have bought a gift for you this holiday season. It will be delivered via - ' + str(company) + '. Track vide this tracking ID: ' + str(trackingID) + '. \nHappy Holidays! \nSent via GiftSpace WebApp.'
+    sendBody = str(sendBody)
+
+    message = client.messages.create(  
+                              body=sendBody,
+                              from_='+14347223111',      
+                              to=sendTo 
+                          ) 
+    
+    print(message.sid)
+
+    return Response('MESSAGE SENT')
+
+
+    pass

@@ -14,7 +14,7 @@ const AddGiftPage = () => {
 
         // To get the person (list of recipients) added by the user
         let getPerson = async() =>{
-            let response = await fetch('https://gift-space.herokuapp.com/api/get-person/', {
+            let response = await fetch('http://127.0.0.1:8000/api/get-person/', {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',

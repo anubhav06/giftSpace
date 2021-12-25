@@ -28,11 +28,13 @@ const TrackingPage = () => {
 
     const history = useHistory()
 
+    const [sendMsg, setMsg] = useState(false);
     const [addItem, setAddItem] = useState(false);
     const [items, setItems] = useState([]);
     const [description, setNameOfGift] = useState("");
     const [id, setIDofGift] = useState([])
     const [trackingID, setTrackingID] = useState(0);
+    const [mobileNumber, setMobileNumber] = useState(0);
     const [recipient, setForWhomGift] = useState("");
     const [company, setDeliveryCompany] = useState("");
 
@@ -42,7 +44,7 @@ const TrackingPage = () => {
 
         // To get the tracking data
         let getTrackingData = async() =>{
-            let response = await fetch('https://gift-space.herokuapp.com/api/get-tracking/', {
+            let response = await fetch('http://127.0.0.1:8000/api/get-tracking/', {
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
@@ -105,7 +107,7 @@ const TrackingPage = () => {
                     onClick={async(e) => {
                         // setting the main items useState
                         e.preventDefault()
-                        let response = await fetch('https://gift-space.herokuapp.com/api/add-tracking/', {
+                        let response = await fetch('http://127.0.0.1:8000/api/add-tracking/', {
                             method:'POST',
                             headers:{
                                 'Content-Type':'application/json',
@@ -136,6 +138,50 @@ const TrackingPage = () => {
                     </AddToListButton>
                 </AddItemPopUp>
 
+                {/*  POP UP TO SEND MSG */}
+                <AddItemPopUp show={sendMsg}>
+                    <Cross onClick={() => setMsg(!sendMsg)} />
+                    <HeadingPopUp> SEND MESSAGE </HeadingPopUp>
+                    
+                    <InputPerson
+                    onChange={(e) => setForWhomGift(e.target.value)}
+                    type="text"
+                    placeholder="Recipient's Name"
+                    />
+                    <InputPrice
+                    onChange={(e) => setMobileNumber(e.target.value)}
+                    type="number"
+                    placeholder="Enter mobile number (with country code)"
+                    />
+                    <AddToListButton
+                    onClick={async(e) => {
+                        e.preventDefault()
+                        let response = await fetch('http://127.0.0.1:8000/api/send-message/', {
+                            method:'POST',
+                            headers:{
+                                'Content-Type':'application/json',
+                                'Authorization':'Bearer ' + String(authTokens.access)
+                            },
+                            body:JSON.stringify({'company':company, 'trackingID':trackingID, 'description':description, 'recipient':recipient, 'mobileNumber':mobileNumber})
+                        })
+                        let data = await response.json()
+                        if(response.status === 200){
+                            alert('✅ SMS Sent ')
+                        }
+                        else {
+                            alert('ERROR SENDING MESSAGE: ', data)
+                        }
+
+                        console.log('COMPANY: ', company)
+                        console.log('RECIPIENT NAME: ', recipient)
+                        console.log('PHONE NUMBER: ', mobileNumber )
+                        setMsg(!sendMsg);
+                    }}
+                    >
+                    Send
+                    </AddToListButton>
+                </AddItemPopUp>
+
                 <ActualList>
                     {/* error info message if the total budget is falling short of the gift's total*/}
 
@@ -154,36 +200,22 @@ const TrackingPage = () => {
                     return (
                         <>
                         <ListObject key={id}>
-                            {console.log('AFTER ITEMS: ', items)}
-                            {console.log('AFTER ITEMS E: ', e)}
-                            {console.log('AFTER ITEMS ID: ', id)}
                             <GiftName>{e.description}</GiftName>
                             <GiftPrice>{e.trackingID}</GiftPrice>
                             <ForWhom>{e.recipient}</ForWhom>
                             <LinkToGift>{e.company}</LinkToGift>
-                            <Delete key={id}
-                            id={id}
-                            onClick={ async() => {
-                                let response = await fetch(`https://gift-space.herokuapp.com/api/delete-gift/${e.id}/`, {
-                                    method:'POST',
-                                    headers:{
-                                        'Content-Type':'application/json',
-                                        'Authorization':'Bearer ' + String(authTokens.access)
-                                    }
-                                })
-                                let data = await response.json()
-
-                                if(response.status === 200){
-                                    alert(data)
-                                }
-                                else{
-                                    alert('ERROR DELETING GIFT: ', data)
-                                }
-                                let newArr = items.filter((id) => id.id !== e.id);
-                                setItems(newArr);
-                            }}
-                            title="Delete Item"
-                            />
+                            
+                            <AddItemButton key={id} id={id}
+                            onClick={ () =>{
+                                setMsg(!sendMsg)
+                                console.log('TRACKING DATA ID:', e)
+                                setDeliveryCompany(e.company)
+                                setTrackingID(e.trackingID)
+                                setForWhomGift(e.recipient)
+                            } 
+                            }>
+                            Send Message
+                            </AddItemButton>
                         </ListObject>
                         </>
                     );

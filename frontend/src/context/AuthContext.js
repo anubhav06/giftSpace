@@ -28,7 +28,7 @@ export const AuthProvider = ({children}) => {
     let loginUser = async (e )=> {
         e.preventDefault()
         // Make a post request to the api with the user's credentials.
-        let response = await fetch('https://gift-space.herokuapp.com/api/token/', {
+        let response = await fetch('http://127.0.0.1:8000/api/token/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -67,7 +67,7 @@ export const AuthProvider = ({children}) => {
         e.preventDefault()
 
         // Make a post request to the api with the user's credentials.
-        let response = await fetch('https://gift-space.herokuapp.com/api/register/', {
+        let response = await fetch('http://127.0.0.1:8000/api/register/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -91,7 +91,7 @@ export const AuthProvider = ({children}) => {
     // To set the budget of the logged in user
     let addBudget = async(e) =>{
         e.preventDefault()
-        let response = await fetch('https://gift-space.herokuapp.com/api/set-budget/', {
+        let response = await fetch('http://127.0.0.1:8000/api/set-budget/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
@@ -116,7 +116,7 @@ export const AuthProvider = ({children}) => {
     // To add a person to the user's recipient's list
     let addPerson = async(e) =>{
         e.preventDefault()
-        let response = await fetch('https://gift-space.herokuapp.com/api/add-person/', {
+        let response = await fetch('http://127.0.0.1:8000/api/add-person/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
@@ -138,7 +138,7 @@ export const AuthProvider = ({children}) => {
     // To add a gift
     let addGift = async(e) =>{
         e.preventDefault()
-        let response = await fetch('https://gift-space.herokuapp.com/api/add-gift/', {
+        let response = await fetch('http://127.0.0.1:8000/api/add-gift/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
@@ -187,7 +187,7 @@ export const AuthProvider = ({children}) => {
                 return
             }
             // Make a post request to the api with the refresh token to update the access token
-            let response = await fetch('https://gift-space.herokuapp.com/api/token/refresh/', {
+            let response = await fetch('http://127.0.0.1:8000/api/token/refresh/', {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
