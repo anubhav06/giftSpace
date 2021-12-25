@@ -1,10 +1,11 @@
+from django.http import response
 from rest_framework import status
+from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
-from rest_framework.serializers import Serializer
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -196,7 +197,6 @@ def deleteGift(request, id):
 
     # Delete the requested gift
     gift.delete()
-    
     return Response('✅Gift deleted')
 
 
@@ -213,8 +213,10 @@ def addTrackingData(request):
 
     trackingData = Tracking(user=request.user, company=company, trackingID=trackingID, description=description, recipient=recipient)
     trackingData.save()
+
+    serializer = TrackingSerializer(trackingData)
     
-    return Response('✅Added tracking data')
+    return Response(serializer.data)
 
 
 # To get the tracking data
